@@ -1,0 +1,58 @@
+---
+# {{ ansible_managed }}
+version: '2'
+services:
+  zammad-nginx:
+    ports:
+      - "{{ zammad_instance.zammad_custom_port }}:{{ zammad_instance.zammad_nginx_container_port | default('80') }}"
+    environment:
+      - NGINX_SERVER_SCHEME="https"
+{%if zammad_instance.zammad_sms_download is defined and zammad_instance.zammad_sms_download%}
+    volumes:
+      - zammad-data:/opt/zammad
+{% endif %}
+
+#  zammad-init:
+#    command: ["exit 0"]
+
+  zammad-elasticsearch:
+    environment:
+      - "ES_JAVA_OPTS=-Xms{{ zammad_instance.zammad_elastic_memory|default('512m') }} -Xmx{{ zammad_instance.zammad_elastic_memory|default('512m') }}"
+{%if zammad_instance.zammad_sms_download is defined and zammad_instance.zammad_sms_download%}
+
+  zammad-pull-config:
+    image: alpine
+    volumes:
+      - zammad-data:/opt/zammad
+    command: >
+      sh -c "apk add curl &&
+      curl https://raw.githubusercontent.com/lcx/zammad-sms-cloudvox/master/cloudvox.rb > /opt/zammad/app/models/channel/driver/sms/cloudvox.rb"
+    depends_on:
+      - zammad-nginx
+{% endif %}
+{%if zammad_instance.zammad_custom_image is defined %}
+
+  zammad-railsserver:
+    image: {{ zammad_instance.zammad_custom_image }}
+
+  zammad-scheduler:
+    image: {{ zammad_instance.zammad_custom_image }}
+{% endif %}
+{% if zammad_instance.grafana_port is defined %}
+
+  grafana:
+    image: grafana/grafana:8.0.3
+    ports:
+      - {{ zammad_instance.grafana_port }}:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/dashboards
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-worldmap-panel
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana/
+
+volumes:
+  grafana-data:
+    driver: local
+{% endif %}

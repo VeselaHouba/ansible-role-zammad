@@ -1,0 +1,28 @@
+---
+- name: Make sure git is installed
+  apt:
+    name: git
+
+- name: Prepare zammad git repos for deploy
+  git:
+    dest: "/opt/docker/{{ zammad_instance.name }}"
+    repo: "https://github.com/zammad/zammad-docker-compose.git"
+    update: no
+
+- name: Custom docker-compose overrides
+  template:
+    src: docker-compose.override.yml.j2
+    dest: "/opt/docker/{{ zammad_instance.name }}/docker-compose.override.yml"
+
+- name: Deploy docker
+  include_role:
+    name: veselahouba.docker
+
+- name: Deploy docker
+  include_role:
+    name: veselahouba.docker_container
+  vars:
+    docker_composes:
+      - name: "{{ zammad_instance.name }}"
+        project_src: /opt/docker/{{ zammad_instance.name }}
+        state: "{{ zammad_instance.state|default('present') }}"

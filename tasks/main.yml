@@ -1,0 +1,14 @@
+---
+- name: Deploy zammad proxies
+  include_tasks: zammad-proxy.yml
+  with_items: "{{ zammad_instances }}"
+  loop_control:
+    loop_var: zammad_instance
+  when: zammad_instance.proxy_server == inventory_hostname
+
+- name: Deploy zammad docker
+  include_tasks: zammad-docker.yml
+  with_items: "{{ zammad_instances }}"
+  loop_control:
+    loop_var: zammad_instance
+  when: zammad_instance.docker_server == inventory_hostname

@@ -1,0 +1,6 @@
+---
+roles:
+  - name: jdauphant.nginx
+  - name: veselahouba.letsencrypt
+  - name: veselahouba.docker
+  - name: veselahouba.docker_container
