@@ -32,6 +32,7 @@
         server_type: "{{ item.server_type }}"
         ssh_keys:
           - "{{ ssh_key_name }}"
+          - "{{ item.custom_ssh_key_name|default(omit) }}"
         volumes: "{{ item.volumes | default(omit) }}"
         image: "{{ item.image }}"
         location: "{{ item.location | default(omit) }}"

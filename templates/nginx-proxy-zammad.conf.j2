@@ -39,7 +39,7 @@ server {
    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
    ssl_prefer_server_ciphers on;
    ssl_ciphers 'AES128+EECDH:AES128+EDH';
-   ssl_dhparam /etc/ssl/dhparams.pem;
+   ssl_dhparam /etc/ssl/dhparam.pem;
    ssl_session_cache shared:SSL:10m;
    ssl_stapling on;
    ssl_stapling_verify on;
@@ -54,8 +54,13 @@ server {
 
    # ssl certificate files
    ssl on;
+{% if item.value.passed_item.custom_cert is defined %}
+   ssl_certificate {{ item.value.passed_item.custom_cert }};
+   ssl_certificate_key {{ item.value.passed_item.custom_cert_key }};
+{% else %}
    ssl_certificate /etc/letsencrypt/live/{{ item.value.passed_item.zammad_fqdn }}/fullchain.pem;
    ssl_certificate_key /etc/letsencrypt/live/{{ item.value.passed_item.zammad_fqdn }}/privkey.pem;
+{% endif %}
 
    location /ws {
        proxy_http_version 1.1;

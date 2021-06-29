@@ -26,7 +26,6 @@ docker \
   -e REF=manual \
   -e REPO_NAME \
   veselahouba/molecule bash -c "
-  shellcheck_wrapper && \
   flake8 && \
   yamllint . && \
   ansible-lint && \

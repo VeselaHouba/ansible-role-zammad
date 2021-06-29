@@ -9,9 +9,15 @@
           - locales
           - tzdata
           - apt-transport-https
+          - ssl-cert
 
     - name: Create dirs missing in docker image
       file:
         path: /run/lock/
         state: directory
         mode: 0755
+
+    - name: genereate snakeoil certs
+      command: make-ssl-cert generate-default-snakeoil
+      args:
+        creates: /etc/ssl/private/ssl-cert-snakeoil.key

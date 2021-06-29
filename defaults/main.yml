@@ -1,14 +1,17 @@
 ---
-ssl_certs_dhparam: /etc/ssl/dhparams.pem
+letsencrypt_dhparam: /etc/ssl/dhparam.pem
 zammad_instances: []
-  # - name: zammad-test
-  #   zammad_custom_port: 10080
-  #   zammad_fqdn: your_fqdn
-  #   zammad_backend_ip: 127.0.0.1
-  #   proxy_server: your_proxy_host
-  #   docker_server: your_docker_host
-  #   ############ optional #########
-  #   letsencrypt_deploy: false # default is true
-  #   zammad_custom_image: veselahouba/zammad-docker-compose:zammad-legacy-ssl${VERSION}
-  #   zammad_elastic_memory: 2048m
-  #   grafana_port: 3000
+# zammad_instances:
+#   - name: zammad-test
+#     zammad_custom_port: 10080
+#     zammad_fqdn: your_fqdn
+#     zammad_backend_ip: 127.0.0.1
+#     proxy_server: your_proxy_host
+#     docker_server: your_docker_host
+#     ############ optional #########
+#     letsencrypt_deploy: false # default is true
+#     custom_cert_path: /etc/ssl/certs/ssl-cert-snakeoil.pem
+#     custom_key_path: /etc/ssl/private/ssl-cert-snakeoil.key
+#     zammad_custom_image: veselahouba/zammad-docker-compose:zammad-legacy-ssl${VERSION}
+#     zammad_elastic_memory: 2048m
+#     grafana_port: 3000

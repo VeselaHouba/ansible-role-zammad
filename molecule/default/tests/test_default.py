@@ -12,13 +12,28 @@ def test_docker_is_running(host):
     assert cmd.is_enabled
 
 
-def test_docker_daemon_connection(host):
+def test_services_running(host):
     c = host.run('docker ps')
+    # assert 'zammad-test_grafana_1' in c.stdout
+    assert 'zammad-test_zammad-backup_1' in c.stdout
+    assert 'zammad-test_zammad-elasticsearch_1' in c.stdout
+    assert 'zammad-test_zammad-memcached_1' in c.stdout
+    assert 'zammad-test_zammad-nginx_1' in c.stdout
+    assert 'zammad-test_zammad-postgresql_1' in c.stdout
+    assert 'zammad-test_zammad-railsserver_1' in c.stdout
+    assert 'zammad-test_zammad-scheduler_1' in c.stdout
+    assert 'zammad-test_zammad-websocket_1' in c.stdout
     assert c.rc == 0
 
 
-def test_docker_container_start(host):
-    with host.sudo():
-        c = host.run('docker run --rm alpine:3.12.0 cat /etc/alpine-release')
-        assert c.rc == 0
-        assert '3.12.0' in c.stdout
+def test_config_present(host):
+    f = host.file("/etc/nginx/sites-enabled/your_fqdn.conf")
+    assert f.exists
+    assert f.contains("snakeoil")
+    # assert f.contains("grafana")
+
+
+def test_curl(host):
+    c = host.run("curl -k -H Host:your_fqdn https://localhost")
+    assert c.rc == 0
+    assert '<title>Zammad Helpdesk</title>' in c.stdout

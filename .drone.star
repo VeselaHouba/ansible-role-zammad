@@ -1,7 +1,7 @@
 def main(ctx):
 
   use_hetzner = True
-
+  docker_images = []
   hetzner_images = [
     "debian-10"
   ]

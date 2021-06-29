@@ -1,4 +1,10 @@
 ---
+- name: Generate dhparams for nginx
+  include_role:
+    name: veselahouba.letsencrypt
+  vars:
+    ssl_certs_letsencrypt_list: []
+
 - name: Run nginx tasks
   include_role:
     name: jdauphant.nginx
