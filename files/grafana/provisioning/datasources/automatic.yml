@@ -1,0 +1,56 @@
+---
+apiVersion: 1
+datasources:
+  - name: ES - Chat Sessions
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_chat_session
+    jsonData:
+      timeField: created_at
+      esVersion: 7.10.1
+
+  - name: ES - CTI Log
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_cti_log
+    jsonData:
+      timeField: start_at
+      esVersion: 7.10.1
+
+  - name: ES - Ticket Articles
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_ticket
+    jsonData:
+      timeField: article.created_at
+      esVersion: 7.10.1
+
+  - name: ES - Tickets by closed_at
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_ticket
+    jsonData:
+      timeField: close_at
+      esVersion: 7.10.1
+
+  - name: ES - Tickets by created_at
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_ticket
+    jsonData:
+      timeField: created_at
+      esVersion: 7.10.1
+
+  - name: ES - Tickets by first_response_at
+    type: elasticsearch
+    access: proxy
+    url: http://zammad-elasticsearch:9200
+    database: zammad_production_ticket
+    jsonData:
+      timeField: first_response_at
+      esVersion: 7.10.1

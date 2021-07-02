@@ -18,6 +18,15 @@
     owner: root
     group: root
 
+- name: Grafana config
+  copy:
+    src: grafana/
+    dest: "/opt/docker/{{ zammad_instance.name }}/grafana/"
+    mode: 0644
+    directory_mode: 0755
+    owner: root
+    group: root
+
 - name: Deploy docker
   include_role:
     name: veselahouba.docker
@@ -34,7 +43,7 @@
         project_src: /opt/docker/{{ zammad_instance.name }}
         state: "{{ zammad_instance.state|default('present') }}"
 
-- name: "wait for ABC to come up"
+- name: Wait for zammad instance to start
   uri:
     url: "http://localhost:{{ zammad_instance.zammad_custom_port }}"
     status_code: 200

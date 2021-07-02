@@ -14,7 +14,7 @@ def test_docker_is_running(host):
 
 def test_services_running(host):
     c = host.run('docker ps')
-    # assert 'zammad-test_grafana_1' in c.stdout
+    assert 'zammad-test_grafana_1' in c.stdout
     assert 'zammad-test_zammad-backup_1' in c.stdout
     assert 'zammad-test_zammad-elasticsearch_1' in c.stdout
     assert 'zammad-test_zammad-memcached_1' in c.stdout
@@ -30,7 +30,7 @@ def test_config_present(host):
     f = host.file("/etc/nginx/sites-enabled/your_fqdn.conf")
     assert f.exists
     assert f.contains("snakeoil")
-    # assert f.contains("grafana")
+    assert f.contains("grafana")
 
 
 def test_curl(host):

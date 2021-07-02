@@ -23,7 +23,7 @@ provisioner:
             docker_server: ${REPO_NAME}-${MOLECULE_IMAGE}-${REF}
             custom_cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
             custom_cert_key: /etc/ssl/private/ssl-cert-snakeoil.key
-            # grafana_port: 3000
+            grafana_port: 3000
             letsencrypt_deploy: false
 verifier:
   name: testinfra
