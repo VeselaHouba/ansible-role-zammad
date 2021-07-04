@@ -3,7 +3,8 @@ def main(ctx):
   use_hetzner = True
   docker_images = []
   hetzner_images = [
-    "debian-10"
+    "debian-10",
+    "ubuntu-20.04"
   ]
 
   ############################################################################

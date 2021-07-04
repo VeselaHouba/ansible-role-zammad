@@ -37,6 +37,7 @@ scenario:
     - create
     - prepare
     - converge
+    # Zammad contains init container, which starts everytime
     # - idempotence
     - side_effect
     - verify
