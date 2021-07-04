@@ -23,7 +23,7 @@
   include_role:
     name: veselahouba.letsencrypt
   vars:
-    ssl_certs_letsencrypt_list:
+    letsencrypt_cert_list:
       - name: "{{ zammad_instance.zammad_fqdn }}"
         mail: support@lcx.at
         state: "{{ zammad_instance.state|d(omit) }}"
