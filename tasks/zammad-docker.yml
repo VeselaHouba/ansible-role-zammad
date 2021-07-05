@@ -26,6 +26,7 @@
     directory_mode: 0755
     owner: root
     group: root
+  when: zammad_instance.grafana_port is defined
 
 - name: Deploy docker
   include_role:
