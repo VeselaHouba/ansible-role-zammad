@@ -5,7 +5,7 @@
   vars:
     ssl_certs_letsencrypt_list: []
 
-- name: Run nginx tasks
+- name: Run nginx tasks {{ zammad_instance.name }}
   include_role:
     name: jdauphant.nginx
   vars:
@@ -19,7 +19,7 @@
       }
     }}"
 
-- name: Run Let'sencrypt tasks
+- name: Run Let'sencrypt tasks for {{ zammad_instance.name }}
   include_role:
     name: veselahouba.letsencrypt
   vars:
