@@ -1,0 +1,7 @@
+kind: template
+load: drone.star
+data:
+  use_hetzner: true
+  hetzner_images:
+    - debian-11
+    - ubuntu-20.04
