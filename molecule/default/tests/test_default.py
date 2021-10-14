@@ -23,6 +23,7 @@ def test_services_running(host):
     assert 'zammad-test_zammad-railsserver_1' in c.stdout
     assert 'zammad-test_zammad-scheduler_1' in c.stdout
     assert 'zammad-test_zammad-websocket_1' in c.stdout
+    assert 'zammad-test_zammad-redis_1' in c.stdout
     assert c.rc == 0
 
 
