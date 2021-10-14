@@ -18,6 +18,13 @@
     owner: root
     group: root
 
+- name: Custom zammad version for {{ zammad_instance.name }}
+  lineinfile:
+    path: "/opt/docker/{{ zammad_instance.name }}/.env"
+    line: VERSION=-zammad_instance.version
+    regexp: ^VERSION=
+  when: zammad_instance.version is defined
+
 - name: Grafana config for {{ zammad_instance.name }}
   copy:
     src: grafana/
