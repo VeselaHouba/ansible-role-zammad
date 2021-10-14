@@ -1,6 +1,6 @@
 ---
 # {{ ansible_managed }}
-version: '2'
+version: '{{ zammad_instance.zammad_compose_version|default(2) }}'
 services:
   zammad-nginx:
     ports:
