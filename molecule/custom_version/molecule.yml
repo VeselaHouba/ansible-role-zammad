@@ -16,10 +16,8 @@ provisioner:
         zammad_instances:
           - name: zammad-test
             zammad_custom_port: 10080
-            zammad_nginx_container_port: 8080
             zammad_fqdn: your_fqdn
             zammad_backend_ip: 127.0.0.1
-            zammad_compose_version: 3
             zammad_version: 4.1.0-6
             proxy_server: ${REPO_NAME}-${MOLECULE_IMAGE}-${REF}
             docker_server: ${REPO_NAME}-${MOLECULE_IMAGE}-${REF}

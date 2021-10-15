@@ -20,28 +20,47 @@ It's designed as simple usage - Role will take care of installing docker, nginx,
 - `proxy_server: your_proxy_host` - host where nginx will run. Must match host in inventory
 - `docker_server: your_docker_host` - host where docker will run. Must match host in inventory
 
-### Optional variables
+### Optional zammad variables
+- `zammad_compose_version: 3` - Compose override version changed around Zammad version 5.
+- `zammad_custom_image`: - You can override default Zammad image here.
+- `zammad_elastic_memory: 2048m` - Memory limit for Elasticsearch
+- `zammad_version: 4.1.0-6` - Will replace version in `.env` file
+
+### Optional proxy & other variables
 - `letsencrypt_deploy: true` - Do you wish to register let'sencrypt? Will work only when DNS is setup properly. Default `true`
 - `custom_cert_path: PATH` - Path to certificate, if you don't want to use letsencrypt.
 - `custom_key_path: PATH` - Path to certificate key, if you don't want to use letsencrypt.
-- `zammad_custom_image`: - You can override default Zammad image here.
-- `zammad_elastic_memory: 2048m` - Memory limit for Elasticsearch
--  `grafana_port: 3000` - On which port should grafana listen. Implies enabling grafana deploy
+- `grafana_port: 3000` - On which port should grafana listen. Implies enabling grafana deploy
+
+### Minimal example
+```YAML
+zammad_instances:
+  - name: zammad-assaabloy
+    zammad_backend_ip: 127.0.0.1
+    zammad_custom_port: 10080
+    zammad_fqdn: your_fqdn
+    proxy_server: your_proxy_host
+    docker_server: your_docker_host
+```
 
 ### Full example
+
 ```YAML
 zammad_instances:
   - name: zammad-test
-    zammad_custom_port: 10080
-    zammad_fqdn: your_fqdn
     zammad_backend_ip: 127.0.0.1
+    zammad_compose_version: 3
+    zammad_custom_image: veselahouba/zammad-docker-compose:zammad-legacy-ssl${VERSION}
+    zammad_custom_port: 10080
+    zammad_elastic_memory: 2048m
+    zammad_fqdn: your_fqdn
+    zammad_nginx_container_port: 8080
+    zammad_version: 5.0.1-5
     proxy_server: your_proxy_host
     docker_server: your_docker_host
     letsencrypt_deploy: false
     custom_cert_path: /etc/ssl/certs/ssl-cert-snakeoil.pem
     custom_key_path: /etc/ssl/private/ssl-cert-snakeoil.key
-    zammad_custom_image: veselahouba/zammad-docker-compose:zammad-legacy-ssl${VERSION}
-    zammad_elastic_memory: 2048m
     grafana_port: 3000
 ```
 

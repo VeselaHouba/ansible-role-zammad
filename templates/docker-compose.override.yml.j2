@@ -1,10 +1,10 @@
 ---
 # {{ ansible_managed }}
-version: '{{ zammad_instance.zammad_compose_version|default(2) }}'
+version: '{{ zammad_instance.zammad_compose_version|default(3) }}'
 services:
   zammad-nginx:
     ports:
-      - "{{ zammad_instance.zammad_custom_port }}:{{ zammad_instance.zammad_nginx_container_port | default('80') }}"
+      - "{{ zammad_instance.zammad_custom_port }}:{{ zammad_instance.zammad_nginx_container_port | default('8080') }}"
     environment:
       - NGINX_SERVER_SCHEME="https"
 {%if zammad_instance.zammad_sms_download is defined and zammad_instance.zammad_sms_download%}
