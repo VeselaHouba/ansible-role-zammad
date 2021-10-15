@@ -25,6 +25,14 @@
     regexp: ^VERSION=
   when: zammad_instance.zammad_version is defined
 
+- name: Deploy backup script for {{ zammad_instance.name }}
+  template:
+    src: backup_zammad.sh.j2
+    dest: "/opt/docker/backup_{{ zammad_instance.name }}.sh"
+    mode: 0700
+    owner: root
+    group: root
+
 - name: Grafana config for {{ zammad_instance.name }}
   copy:
     src: grafana/

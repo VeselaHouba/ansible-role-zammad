@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+target="/opt/docker/{{ zammad_instance.name }}_backup_full_$(date +%Y-%m-%d_%H-%M).tar"
+echo "Creating backup ${target}"
+tar cf \
+  "${target}" \
+  /opt/docker/{{ zammad_instance.name }}/ \
+  /var/lib/docker/volumes/{{ zammad_instance.name }}_*-data
+echo "Done"

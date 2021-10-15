@@ -64,6 +64,8 @@ zammad_instances:
     grafana_port: 3000
 ```
 
+### Backups
+Zammad takes backups of itself, but if you want to run one-shot backup of docker volumes including docker-compose config, there's small script deployed in `/opt/backup_<instance-name>.sh`
 
 ## Author Information
 

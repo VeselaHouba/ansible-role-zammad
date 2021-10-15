@@ -43,3 +43,12 @@ def test_curl(host):
 def test_grafana_config_presence(host):
     f = host.file("/opt/docker/zammad-test/grafana")
     assert f.exists
+
+
+def test_backup_script(host):
+    testfile = "/opt/docker/backup_zammad-test.sh"
+    f = host.file(testfile)
+    c = host.run(testfile)
+    assert f.exists
+    assert '/opt/docker/zammad-test_backup_full_' in c.stdout
+    assert c.rc == 0
