@@ -1,3 +1,4 @@
 ---
 letsencrypt_dhparam: /etc/ssl/dhparam.pem
+letsencrypt_email: support@domain.com
 zammad_instances: []

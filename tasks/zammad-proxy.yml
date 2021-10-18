@@ -11,7 +11,7 @@
   vars:
     letsencrypt_cert_list:
       - name: "{{ zammad_instance.zammad_fqdn }}"
-        mail: support@lcx.at
+        mail: "{{ zammad_instance.letsencrypt_email|default(letsencrypt_email) }}"
         state: "{{ zammad_instance.state|d('present') }}"
   when: zammad_instance.letsencrypt_deploy | default(true)
 

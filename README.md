@@ -9,6 +9,7 @@ It's designed as simple usage - Role will take care of installing docker, nginx,
 1. Setup your hosts file, decide which host to use as proxy and which as backend (can also be same host)
 1. Setup hostvars according to following example
 
+`letsencrypt_email` default e-mail when one is not defined on instance level.
 `zammad_instances` is list containing multiple zammad definitions. Key-values in list:
 
 ### Mandatory variables
@@ -25,6 +26,7 @@ It's designed as simple usage - Role will take care of installing docker, nginx,
 - `zammad_custom_image`: - You can override default Zammad image here.
 - `zammad_elastic_memory: 2048m` - Memory limit for Elasticsearch
 - `zammad_version: 4.1.0-6` - Will replace version in `.env` file
+- `letsencrypt_email`: Contact e-mail used for Let'sEncrypt notifications
 
 ### Optional proxy & other variables
 - `letsencrypt_deploy: true` - Do you wish to register let'sencrypt? Will work only when DNS is setup properly. Default `true`
