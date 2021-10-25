@@ -11,6 +11,11 @@ services:
     volumes:
       - zammad-data:/opt/zammad
 {% endif %}
+{% if zammad_instance.docker_ext_network is defined %}
+    networks:
+      - default
+      - {{ zammad_instance.docker_ext_network }}
+{% endif %}
 
   zammad-elasticsearch:
     environment:
@@ -52,4 +57,10 @@ services:
 volumes:
   grafana-data:
     driver: local
+{% endif %}
+
+{% if zammad_instance.docker_ext_network is defined %}
+networks:
+  {{ zammad_instance.docker_ext_network }}:
+    external: true
 {% endif %}
