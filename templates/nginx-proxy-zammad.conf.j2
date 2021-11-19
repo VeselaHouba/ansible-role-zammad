@@ -46,7 +46,7 @@ server {
    resolver 8.8.4.4 8.8.8.8 valid=300s;
    resolver_timeout 10s;
 
-   access_log  /var/log/nginx/{{ item.value.passed_item.zammad_fqdn }}.access.log;
+   access_log /var/log/nginx/{{ item.value.passed_item.zammad_fqdn }}.access.log zammad;
    error_log  /var/log/nginx/{{ item.value.passed_item.zammad_fqdn }}.error.log;
    root   /usr/share/nginx/html;
    index  index.html index.htm;
