@@ -19,7 +19,7 @@ services:
 
   zammad-elasticsearch:
     environment:
-      - "ES_JAVA_OPTS=-Xms{{ zammad_instance.zammad_elastic_memory|default('512m') }} -Xmx{{ zammad_instance.zammad_elastic_memory|default('512m') }}"
+      - "ES_JAVA_OPTS=-Xms{{ zammad_instance.zammad_elastic_memory|default('512m') }} -Xmx{{ zammad_instance.zammad_elastic_memory|default('512m') }} -Dlog4j2.formatMsgNoLookups=true"
 {%if zammad_instance.zammad_sms_download is defined and zammad_instance.zammad_sms_download%}
 
   zammad-pull-config:
