@@ -17,7 +17,7 @@
 
 - name: Run nginx tasks {{ zammad_instance.name }}
   include_role:
-    name: jdauphant.nginx
+    name: veselahouba.nginx
   vars:
     nginx_sites: "{{
       {
