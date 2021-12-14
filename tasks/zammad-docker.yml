@@ -67,3 +67,4 @@
   until: result.status == 200
   retries: 60
   delay: 5
+  when: zammad_instance.state|default('present') == 'present'
