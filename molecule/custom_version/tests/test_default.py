@@ -2,6 +2,8 @@ import os
 
 import testinfra.utils.ansible_runner
 
+import yaml
+
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
@@ -27,8 +29,11 @@ def test_services_running(host):
 
 
 def test_custom_version_running(host):
+    stream = host.file('/tmp/ansible-vars.yml').content
+    ansible_vars = yaml.load(stream, Loader=yaml.FullLoader)
+    version = ansible_vars['zammad_instances'][0]['zammad_version']
     c = host.run('docker ps')
-    assert 'zammad/zammad-docker-compose:zammad-4.1.0-6' in c.stdout
+    assert 'zammad/zammad-docker-compose:zammad-' + version in c.stdout
     assert c.rc == 0
 
 
