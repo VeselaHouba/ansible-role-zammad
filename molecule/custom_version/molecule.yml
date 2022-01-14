@@ -24,6 +24,7 @@ provisioner:
             custom_cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
             custom_cert_key: /etc/ssl/private/ssl-cert-snakeoil.key
             letsencrypt_deploy: false
+            zammad_backup_hold_days: 20
 
 verifier:
   name: testinfra

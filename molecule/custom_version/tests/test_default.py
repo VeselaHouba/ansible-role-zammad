@@ -41,3 +41,11 @@ def test_curl(host):
     c = host.run("curl -k -H Host:your_fqdn https://localhost")
     assert c.rc == 0
     assert '<title>Zammad Helpdesk</title>' in c.stdout
+
+
+def test_custom_settings_in_compose(host):
+    stream = host.file('/tmp/ansible-vars.yml').content
+    ansible_vars = yaml.load(stream, Loader=yaml.FullLoader)
+    hold_days = ansible_vars['zammad_instances'][0]['zammad_backup_hold_days']
+    compose = host.file("/opt/docker/zammad-test/docker-compose.override.yml")
+    assert compose.contains('HOLD_DAYS=' + str(hold_days))
