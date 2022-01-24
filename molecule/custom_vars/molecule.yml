@@ -25,6 +25,8 @@ provisioner:
             custom_cert_key: /etc/ssl/private/ssl-cert-snakeoil.key
             letsencrypt_deploy: false
             zammad_backup_hold_days: 20
+            zammad_postgres_user: somecrazyusername
+            zammad_postgres_pass: veideif2ohy7quae5geeKeiruphahY
 
 verifier:
   name: testinfra

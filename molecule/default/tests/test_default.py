@@ -52,3 +52,9 @@ def test_backup_script(host):
     assert f.exists
     assert '/opt/docker/zammad-test_backup_full_' in c.stdout
     assert c.rc == 0
+
+
+def test_custom_settings_env_file(host):
+    zammad_env = host.file("/opt/docker/zammad-test/.env")
+    assert zammad_env.contains('POSTGRES_USER=zammad')
+    assert zammad_env.contains('POSTGRES_PASS=zammad')

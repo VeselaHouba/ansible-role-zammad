@@ -28,6 +28,8 @@ It's designed as simple usage - Role will take care of installing docker, nginx,
 - `zammad_version: 4.1.0-6` - Will replace version in `.env` file
 - `letsencrypt_email`: Contact e-mail used for Let'sEncrypt notifications
 - `zammad_backup_hold_days: 10` - Number of days to keep backups.
+- `zammad_postgress_user: zammad` - psql user
+- `zammad_postgress_pass: zammad` - psql password
 
 ### Optional proxy & other variables
 - `letsencrypt_deploy: true` - Do you wish to register let'sencrypt? Will work only when DNS is setup properly. Default `true`

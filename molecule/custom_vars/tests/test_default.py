@@ -49,3 +49,13 @@ def test_custom_settings_in_compose(host):
     hold_days = ansible_vars['zammad_instances'][0]['zammad_backup_hold_days']
     compose = host.file("/opt/docker/zammad-test/docker-compose.override.yml")
     assert compose.contains('HOLD_DAYS=' + str(hold_days))
+
+
+def test_custom_settings_env_file(host):
+    stream = host.file('/tmp/ansible-vars.yml').content
+    ansible_vars = yaml.load(stream, Loader=yaml.FullLoader)
+    zammad_user = ansible_vars['zammad_instances'][0]['zammad_postgres_user']
+    zammad_pass = ansible_vars['zammad_instances'][0]['zammad_postgres_pass']
+    zammad_env = host.file("/opt/docker/zammad-test/.env")
+    assert zammad_env.contains('POSTGRES_USER=' + zammad_user)
+    assert zammad_env.contains('POSTGRES_PASS=' + zammad_pass)

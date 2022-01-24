@@ -25,6 +25,20 @@
     regexp: ^VERSION=
   when: zammad_instance.zammad_version is defined
 
+- name: Custom postgres user/password {{ zammad_instance.name }}
+  lineinfile:
+    path: "/opt/docker/{{ zammad_instance.name }}/.env"
+    line: POSTGRES_USER={{ zammad_instance.zammad_postgres_user }}
+    regexp: ^POSTGRES_USER=
+  when: zammad_instance.zammad_postgres_user is defined
+
+- name: Custom postgres user/password {{ zammad_instance.name }}
+  lineinfile:
+    path: "/opt/docker/{{ zammad_instance.name }}/.env"
+    line: POSTGRES_PASS={{ zammad_instance.zammad_postgres_pass }}
+    regexp: ^POSTGRES_PASS=
+  when: zammad_instance.zammad_postgres_pass is defined
+
 - name: Deploy backup script for {{ zammad_instance.name }}
   template:
     src: backup_zammad.sh.j2
