@@ -16,13 +16,18 @@ services:
       - default
       - {{ zammad_instance.docker_ext_network }}
 {% endif %}
-{% if zammad_instance.zammad_backup_hold_days is defined %}
+{% if zammad_instance.zammad_backup_hold_days is defined or zammad_instance.zammad_backup_db_only is defined %}
   zammad-backup:
     environment:
       - BACKUP_SLEEP=86400
-      - HOLD_DAYS={{ zammad_instance.zammad_backup_hold_days }}
       - POSTGRESQL_USER=${POSTGRES_USER}
       - POSTGRESQL_PASSWORD=${POSTGRES_PASS}
+{% endif %}
+{% if zammad_instance.zammad_backup_hold_days is defined %}
+      - HOLD_DAYS={{ zammad_instance.zammad_backup_hold_days }}
+{% endif %}
+{% if zammad_instance.zammad_backup_db_only is defined and zammad_instance.zammad_backup_db_only %}
+      - NO_FILE_BACKUP=yes
 {% endif %}
   zammad-elasticsearch:
     environment:

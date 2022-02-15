@@ -58,3 +58,9 @@ def test_custom_settings_env_file(host):
     zammad_env = host.file("/opt/docker/zammad-test/.env")
     assert zammad_env.contains('POSTGRES_USER=zammad')
     assert zammad_env.contains('POSTGRES_PASS=zammad')
+
+
+def test_custom_settings_not_in_compose(host):
+    compose = host.file("/opt/docker/zammad-test/docker-compose.override.yml")
+    assert not compose.contains('HOLD_DAYS=')
+    assert not compose.contains('NO_FILE_BACKUP=')

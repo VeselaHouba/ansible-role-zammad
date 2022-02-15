@@ -27,6 +27,7 @@ provisioner:
             zammad_backup_hold_days: 20
             zammad_postgres_user: somecrazyusername
             zammad_postgres_pass: veideif2ohy7quae5geeKeiruphahY
+            zammad_backup_db_only: true
 
 verifier:
   name: testinfra
